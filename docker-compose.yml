@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  apigw:
+    build:
+      context: .
+      dockerfile: api/member/apigw/Dockerfile
+    container_name: blog-apigw
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - blog-network
+
+  post:
+    build:
+      context: .
+      dockerfile: api/member/post/Dockerfile
+    container_name: blog-post
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    networks:
+      - blog-network
+
+networks:
+  blog-network:
+    driver: bridge

@@ -1,0 +1,85 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // === Admin ===
+    {
+      "name": "Debug Admin Post",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api/admin/post/cmd",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Admin Category",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api/admin/category/cmd",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Admin Apigw",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api/admin/apigw/cmd",
+      "cwd": "${workspaceFolder}"
+    },
+
+    // === Member ===
+    {
+      "name": "Debug Member Post",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api/member/post/cmd",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Member Category",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api/member/category/cmd",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug Member Apigw",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/api/member/apigw/cmd",
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "🔥 Debug Admin All",
+      "configurations": [
+        "Debug Admin Post",
+        "Debug Admin Category",
+        "Debug Admin Apigw"
+      ]
+    },
+    {
+      "name": "🔥 Debug Member All",
+      "configurations": [
+        "Debug Member Post",
+        "Debug Member Category",
+        "Debug Member Apigw"
+      ]
+    },
+    {
+      "name": "🔥 Debug 全部 All",
+      "configurations": [
+        "Debug Admin Post",
+        "Debug Admin Category",
+        "Debug Admin Apigw",
+        "Debug Member Post",
+        "Debug Member Category",
+        "Debug Member Apigw"
+      ]
+    }
+  ]
+}

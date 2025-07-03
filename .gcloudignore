@@ -1,0 +1,54 @@
+# gcloudignore 用來排除不需要打包到 Cloud Build 的內容
+
+# 本地環境設定檔（避免誤傳）
+.env
+.env.*
+.envrc
+# 不需要的 Git 記錄
+.git/
+.gitignore
+
+# IDE / 系統雜項
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+*.bak
+*.tmp
+
+# 測試 / log / 快取
+coverage/
+*.log
+logs/
+*.testresult
+**/.cache/
+**/__pycache__/
+
+# Docker 不相關檔案
+docker-compose.override.yml
+.docker/
+*.tar
+volume/
+volumes/
+data/
+
+# Node modules（前端常見）
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Go 的 build 產物（通常不需上傳）
+bin/
+build/
+*.out
+*.test
+*.exe
+*.a
+*.o
+*.so
+
+# Terraform（如有）
+.terraform/
+*.tfstate
+*.tfstate.*
