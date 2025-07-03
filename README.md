@@ -1,44 +1,44 @@
 # 🛠 blog-backend-portfolio
 
-This project is the backend system of my personal blog platform (showcase version), built entirely with Golang. It includes both frontend-facing (`member`) and admin-facing (`admin`) APIs. The project structure is modular, allowing future expansion with additional services or sites.
-
-This repository is a **sanitized version for portfolio presentation**, with all environment variables and secrets removed. However, the **core logic and architecture remain fully intact**, making it a solid example of my backend development skills.
+This project is the backend service for my personal blog system, built with Golang, implementing API architecture for both frontend and admin interfaces.
 
 ---
 
-## 📌 Features
+## 📌 Project Features
 
-- Fully developed in **Golang**
-- Clearly separated frontend/backend API structure:
-  - `admin/`: backend API for admin management
-  - `member/`: frontend API for user interactions
-- Modular and scalable architecture (easy to add new sites/services)
-- Follows RESTful API design principles
+- Uses **Golang full development**
+- Clear separation of frontend and backend architecture:
+  - `admin/`: Backend API and management logic
+  - `member/`: Frontend API (for user operations)
+- Supports modular expansion, can add new sites or services at any time
+- Adopts RESTful API design
 - Uses middleware to abstract shared logic
-- Deployable via GCP Cloud Build (`cloudbuild.yaml`)
+- Deployment method: **Push Dockerfile to GCP, automatically built by GCP Cloud Build to create image and deploy to production environment**
 
 ---
 
 ## 🧱 Tech Stack
 
 - Go 1.20+
+- Uses bin as main framework
+- ORM adopts bun
 - Docker / Docker Compose
 - Google Cloud Build / GCP Deploy
-- RESTful API Architecture
-- Modular and well-organized folder structure
+- RESTful API architecture design
+- Modular design, well-structured file layering
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Architecture Overview
 
 ```bash
 blog-backend/
-├── api/                  # Frontend/Admin APIs (admin/member)
+├── api/                  # Frontend and backend API projects (admin/member)
 ├── common/               # Shared logic (middleware, entity, utils)
-├── infra/                # Deployment configs (Cloud Build YAML)
-├── docker-compose.yml    # For local development
-├── Makefile              # Compile / Test shortcuts
-├── go.mod                # Go module config
+├── infra/                # Deployment related files (Cloud Build YAML, etc.)
+├── docker-compose.yml    # For local building
+├── Makefile              # Build / test shortcut commands
+├── go.mod                # Go module configuration
 └── README.md
 ```
 
@@ -46,7 +46,7 @@ blog-backend/
 
 ## 🚀 Deployment Commands (GCP Cloud Build)
 
-Each deployment generates a unique TAG using the current date and Git commit hash, and then triggers a build.
+Each deployment uses the current date and Git commit hash to generate TAG, automatically submitting for build.
 
 ### 🧩 Frontend Services
 ```bash
@@ -63,7 +63,7 @@ gcloud builds submit \
   --substitutions=_TAG=$(date +%Y%m%d)-$(git rev-parse --short=10 HEAD)
 ```
 
-### 🛠 Admin Services
+### 🛠 Backend Services
 ```bash
 gcloud builds submit \
   --config=infra/admin/cloudbuild-apigw.yaml \
@@ -87,59 +87,31 @@ gcloud builds submit \
 
 ---
 
-## 🌐 CORS Configuration
+## 🔧 Environment Variables Configuration
 
-```env
-CORS_ALLOW_ORIGINS=*  
-# For production use:
+```bash
+# 🌐 CORS Configuration
+CORS_ALLOW_ORIGINS=*
+# Recommended for actual deployment:
 # CORS_ALLOW_ORIGINS=http://localhost:5173,https://your-app.com
-```
 
----
-
-## 🧩 Frontend Service URLs
-
-```env
-POST_member_SERVICE=http://localhost:8081  
+# 🧩 Frontend Services
+POST_member_SERVICE=http://localhost:8081
 CATEGORY_member_SERVICE=http://localhost:8082
-```
 
----
-
-## 🛠 Admin Service URLs
-
-```env
-POST_admin_SERVICE=http://localhost:8181  
+# 🛠 Backend Services
+POST_admin_SERVICE=http://localhost:8181
 CATEGORY_admin_SERVICE=http://localhost:8182
-```
 
----
-
-## 🗄 Database Configuration
-
-```env
+# 🗄 Database
 POSTGRES_URL=postgres://postgres:0000@localhost:5432/blog
-```
 
----
-
-## 🌱 Environment
-
-```env
+# 🌱 Environment
 ENV=local
-```
 
----
-
-## ☁️ R2 Object Storage (Cloudflare R2)
-
-```env
-R2_ENDPOINT=https://xxx.r2.cloudflarestorage.com  
-R2_ACCESS_KEY=xxx  
-R2_SECRET_KEY=xxx  
+# ☁️ R2 Object Storage (Cloudflare R2)
+R2_ENDPOINT=https://xxx.r2.cloudflarestorage.com
+R2_ACCESS_KEY=xxx
+R2_SECRET_KEY=xxx
 R2_PUBLIC_BASE_URL=https://pub-xxx.r2.dev
 ```
-
----
-
-> ⚠️ Note: Comments in the source code are written in Traditional Chinese, as this project was originally built for personal use. The code structure and logic are universal and easy to follow.
